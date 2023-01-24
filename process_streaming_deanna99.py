@@ -16,14 +16,14 @@ socket_type = socket.SOCK_DGRAM
 # use the socket constructor to create a socket object we'll call sock
 sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM) 
 
-# read from a file to get some fake data
+# read from a file to get some data, and open a file to write some data
 input_file = open("TeamsFranchises.csv", "r")
-output_file = open("out99.txt", "w")
+output_file = open("out9.txt", "w")
 
-# use the built0in sorted() function to get them in chronological order
+# use the built-in sorted() function to get them in chronological order
 reversed = sorted(input_file)
 
-# create a csv reader for our comma delimited data
+# create a csv reader and writer for our comma delimited data
 reader = csv.reader(reversed, delimiter=",")
 writer = csv.writer(output_file, delimiter=",")
 
@@ -42,6 +42,7 @@ for row in reader:
     sock.sendto(MESSAGE, address_tuple)
     print (f"Sent: {MESSAGE} on port {port}.")
 
+    # write the strings to the output file
     writer.writerow([FranchiseID, FranchiseName, Status, Association])
 
     # sleep for a few seconds
